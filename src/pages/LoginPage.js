@@ -5,7 +5,7 @@ import {RoundButton} from "../components/Button/RoundButton";
 import {Dimensions, Image, KeyboardAvoidingView, Platform, ScrollView, Text} from "react-native";
 import {StyleSheet} from "react-native";
 
-const Container = styled.ScrollView`
+const Container = styled.View`
   flex:1;
   background-color: #101010;
 
