@@ -1,7 +1,4 @@
 //0627 시도(tensorflow+expo recording)
-
-
-
 import * as React from 'react';
 import {Audio} from 'expo-av';
 import styled from 'styled-components/native';
@@ -17,20 +14,33 @@ import {
     RECORDING_OPTION_ANDROID_OUTPUT_FORMAT_MPEG_4, RECORDING_OPTION_IOS_AUDIO_QUALITY_MAX
 } from "expo-av/build/Audio/Recording";
 import {RecordingOptions} from "expo-av/build/Audio/Recording";
+import {Pressable, SafeAreaView, View} from "react-native";
 
 // 녹음하기 버튼 누르면 ComposePage -> 녹음
 // 녹음에서 완료버튼 -> EditPage
 // 녹음에서 취소버튼 -> ComposePage
 // 보내야할 것은 몇분몇초
 
-
 //방법1: colab convert_audio_for_model 함수 참고
 //The SPICE model needs as input an audio file at a sampling rate of 16kHz and with only one channel (mono).
 //(sample_rate: 16000, setChannel:1로 세팅해야 spice model을 사용 can)
 //방법2: 다른 API 찾아보기
-//
 
+const RecordButtonWrapper = styled.Pressable`
+  width: 222px;
+  height: 222px;
+  border-radius: 111px;
+  border-width: 15px;
+  border-color: #51CDDE;
+  align-items: center;
+  justify-content: center;
+`;
 
+const PlayText = styled.Text`
+  font-size: 18px;
+  color: white;
+  text-decoration: underline;
+`;
 
 let rr = "";
 export const RecordPage = ({toggleButton, navigation}) => {
@@ -62,7 +72,6 @@ export const RecordPage = ({toggleButton, navigation}) => {
     const [sound, setSound] = React.useState();
     const [convert, setConvert] = React.useState();
     const [state, setState] = React.useState({recordingT: false});
-
 
     //fitting format for tensorflow model
     // let recordingOption=Audio.RECORDING_OPTIONS_PRESET_HIGH_QUALITY;
@@ -160,7 +169,6 @@ export const RecordPage = ({toggleButton, navigation}) => {
     }
 
     async function init() {
-    //
         await FileSystem.makeDirectoryAsync(FileSystem.documentDirectory + 'flat/download',{intermediates:true});
     //
     //     try {
@@ -190,6 +198,7 @@ export const RecordPage = ({toggleButton, navigation}) => {
     //     } catch (error) {
     //         console.log("error", error);
     //     }
+        // await FileSystem.makeDirectoryAsync(FileSystem.documentDirectory + 'flat');
 
     //
     //
@@ -382,8 +391,8 @@ export const RecordPage = ({toggleButton, navigation}) => {
     }
 
     return (
-        <Container>
-            <StyledPress
+        <SafeAreaView style={{flex: 1, backgroundColor: "#101010", justifyContent: "center", alignItems: "center"}}>
+            <RecordButtonWrapper
                 onPress={recording ? stopRecording : startRecording}
                 onPressOut={() => toggleButton()}>
                 {state.recordingT ?
@@ -404,19 +413,3 @@ export const RecordPage = ({toggleButton, navigation}) => {
 
 export default RecordPage;
 
-const Container = styled.View`
-  flex: 1;
-  justify-content: center;
-  align-items: center;
-  background-color: #101010;
-`;
-
-const StyledPress = styled.Pressable`
-  width: 222px;
-  height: 222px;
-  border-radius: 111px;
-  border-width: 15px;
-  border-color: #51CDDE;
-  align-items: center;
-  justify-content: center;
-`;

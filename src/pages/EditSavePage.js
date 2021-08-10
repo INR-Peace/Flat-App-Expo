@@ -1,19 +1,20 @@
 import * as React from 'react';
 import {useEffect, useLayoutEffect, useState} from "react";
-import {Image, Platform, Switch, Text, TouchableOpacity} from "react-native";
+import {Image, Platform, SafeAreaView, Switch, Text, TouchableOpacity} from "react-native";
 import styled from "styled-components/native";
 import LargeSquareInput from "../components/Input/LargeSquareInput";
 import {AntDesign, MaterialCommunityIcons} from "@expo/vector-icons";
 import UnderLineInput from "../components/Input/UnderLineInput";
 import * as ImagePicker from 'expo-image-picker';
 
-const ParentContainer = styled.View`
-  background-color: #101010;
+const AlbumCoverView = styled.View`
+  width: 100%;
   align-items: center;
-  flex: 1;
+  justify-content: center;
+  background-color: #101010;
 `;
 
-const EditView = styled.View`
+const EditItemView = styled.View`
   flex-direction: row;
   padding: 10px;
   border-color: #8E8E8E;
@@ -23,24 +24,12 @@ const EditView = styled.View`
   align-items: center;
 `;
 
-const ExplainView = styled.View`
+const ExplainInputWrapper = styled.View`
   height: 150px;
   background-color: #101010;
   padding: 10px;
   width: 110%;
   justify-content: center;
-`;
-const PhotoView = styled.View`
-  width: 100%;
-  align-items: center;
-  justify-content: center;
-  background-color: #101010;
-`;
-
-const EditText = styled.Text`
-  color: white;
-  font-size: 20px;
-  padding-right: 10px;
 `;
 
 const EditSavePage = ({navigation}) => {
@@ -102,31 +91,30 @@ const EditSavePage = ({navigation}) => {
     }, [navigation]);
 
     return (
-        <ParentContainer>
+        <SafeAreaView style={{flex: 1, backgroundColor: "#101010", alignItems: "center"}}>
             <TouchableOpacity onPress={pickImage}>
-                <PhotoView>
+                <AlbumCoverView>
                     {
-                        // image && <Image source={{uri: image}} style={{width: 200, height: 200}}/>
                         <Image source={image ? { uri: image } : require('../../assets/images/dla.png')} style={{width: 200, height: 200}} />
                     }
-                </PhotoView>
+                </AlbumCoverView>
             </TouchableOpacity>
-            <EditView>
-                <EditText>제목</EditText>
+            <EditItemView>
+                <Text style={{color: '#ffffff', fontSize: 20, paddingRight: 10}}>제목</Text>
                 <UnderLineInput keyType="done" nextRef={null} icon={false} state="normal"/>
-            </EditView>
-            <EditView>
-                <EditText>설명</EditText>
-                <ExplainView>
+            </EditItemView>
+            <EditItemView>
+                <Text style={{color: '#ffffff', fontSize: 20, paddingRight: 10}}>설명</Text>
+                <ExplainInputWrapper>
                     <LargeSquareInput/>
-                </ExplainView>
-            </EditView>
-            <EditView>
-                <EditText>길이</EditText>
+                </ExplainInputWrapper>
+            </EditItemView>
+            <EditItemView>
+                <Text style={{color: '#ffffff', fontSize: 20, paddingRight: 10}}>길이</Text>
                 <Text style={{color: '#ffffff', paddingLeft: 10, fontSize: 20}}>3분 15초</Text>
-            </EditView>
-            <EditView>
-                <EditText>공개 여부</EditText>
+            </EditItemView>
+            <EditItemView>
+                <Text style={{color: "#ffffff", fontSize: 20, paddingRight: 10}}>공개 여부</Text>
                 <Switch
                     trackColor={{false: "#767577", true: "#307a82"}}
                     thumbColor={isEnabled ? "#5aebff" : "#f4f3f4"}
@@ -134,9 +122,9 @@ const EditSavePage = ({navigation}) => {
                     onValueChange={toggleSwitch}
                     value={isEnabled}
                 />
-            </EditView>
+            </EditItemView>
 
-        </ParentContainer>
+        </SafeAreaView>
     )
 }
 

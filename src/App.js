@@ -85,7 +85,7 @@ const MainScreen = () =>{
 
 const App = () => {
     return (
-        <AnimatedAppLoader image={ require("../assets/flat_splash.png") }>
+        <AnimatedAppLoader image={require("../assets/images/flat_splash_4x.png")} >
             <MainScreen />
         </AnimatedAppLoader>
     );

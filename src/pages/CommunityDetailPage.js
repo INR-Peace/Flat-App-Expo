@@ -1,19 +1,11 @@
 import React, { useState } from 'react';
 import styled from 'styled-components/native';
-import { Pressable, FlatList, Dimensions } from 'react-native';
+import {Pressable, FlatList, Dimensions, View, SafeAreaView} from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { Album } from "../components/Album";
 import { Comment } from "../components/Comment";
 import SmallSquareInput from "../components/Input/SmallSquareInput";
 
-const ParentContainer = styled.SafeAreaView`
-    flex: 1;
-    background-color: #101010;
-`;
-
-const HeaderContainer = styled.View`
-    align-items: center;
-`;
 
 const AlbumContainer = styled.View`
     width: 90%;
@@ -71,7 +63,7 @@ export const CommunityDetailPage = () => {
     const HeaderComponent = () => {
         return (
             <>
-                <HeaderContainer>
+                <View style={{alignItems: "center"}}>
                     <AlbumContainer>
                         <Album state={"PLAY_LARGE"} coverURL={album.coverURL} title={album.title} artist={album.artist} time={album.time} description={album.description} />
                         <IconContainer>
@@ -83,7 +75,7 @@ export const CommunityDetailPage = () => {
                         <CountText>좋아요 3개</CountText>
                     </CountContainer>
                     </AlbumContainer>
-                </HeaderContainer>
+                </View>
             </>
         );
     };
@@ -95,7 +87,7 @@ export const CommunityDetailPage = () => {
     )
 
     return (
-        <ParentContainer>
+        <SafeAreaView style={{flex: 1, backgroundColor: "#101010"}}>
             <FlatList
                 data={comments}
                 renderItem={renderComment}
@@ -103,7 +95,7 @@ export const CommunityDetailPage = () => {
                 ListHeaderComponent={HeaderComponent}
             />
             <SmallSquareInput/>
-        </ParentContainer>
+        </SafeAreaView>
     );
 };
 

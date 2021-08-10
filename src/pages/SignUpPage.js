@@ -1,26 +1,21 @@
 import React, {useRef, useState} from "react";
 import styled from 'styled-components/native';
 import UnderLineInput from "../components/Input/UnderLineInput";
-import {Image} from "react-native";
+import {Dimensions, Image, SafeAreaView, ScrollView, StyleSheet} from "react-native";
 import {RoundButton} from "../components/Button/RoundButton";
 
-const RegisterView = styled.View`
-  height: 300px;
-  justify-content: center;
-  align-items: center;
-  background-color: #101010;
-`;
 const LogoView = styled.View`
   height: 100px;
   justify-content: center;
   align-items: center;
   background-color: #101010;
 `;
-const ParentContainer = styled.SafeAreaView`
-  flex: 1;
-  background-color: #101010;
+
+const RegisterView = styled.View`
+  height: 300px;
   justify-content: center;
   align-items: center;
+  background-color: #101010;
 `;
 
 export const SignUpPage =({ navigation }) => {
@@ -63,9 +58,9 @@ export const SignUpPage =({ navigation }) => {
     };
 
     return (
-        <ParentContainer>
+        <SafeAreaView style={{flex: 1, backgroundColor: "#101010", justifyContent: "center", alignItems: "center"}}>
             <LogoView>
-                <Image source={require('../../assets/images/logo.png')}/>
+                <Image source={require('../../assets/images/flat_logo_4x.png')} resizeMode="center" style={{width: 150, height: 120}}/>
             </LogoView>
             <RegisterView>
                 <UnderLineInput name={'email-outline'} state="Email" setValue={setEmail}
@@ -83,6 +78,6 @@ export const SignUpPage =({ navigation }) => {
                                 setValue={setNickName} icon={true}/>
             </RegisterView>
             <RoundButton state="COLOR_SMALL" name="가입하기" pageName="LoginPage" nav={navigation}/>
-        </ParentContainer>
+        </SafeAreaView>
     );
 };

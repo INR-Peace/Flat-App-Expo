@@ -1,47 +1,30 @@
 import React from "react";
 import styled from 'styled-components/native';
-import {FlatList, Text, TouchableOpacity, View, Button} from "react-native";
+import {FlatList, Text, TouchableOpacity, View, Button, SafeAreaView} from "react-native";
 import {Album} from "../components/Album";
 import {ProfileImage} from "../components/ProfileImage";
 
-const Container = styled.SafeAreaView`
-  flex: 1;
-  justify-content: center;
-  background-color: #101010;
-`;
-const UserFirstView = styled.View`
-  flex: 1;
-  padding: 20px 10px 10px 10px;
-  justify-content: center;
-`;
-const UserSecondView = styled.View`
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-`;
-const UserThirdView = styled.View`
-  padding: 10px;
-  justify-content: center;
-  flex: 1;
-`;
-const OpenSingView = styled.View`
-  flex: 2;
-  padding: 0 10px 0 10px;
-  justify-content: center;
-`;
-const LikeSingView = styled.View`
-  flex: 2;
-  padding: 0 10px 0 10px;
-  justify-content: center;
-`;
-const AlbumView = styled.View`
-  padding-right: 8px;
 
+const ProfileView = styled.View`
+  flex: 2;
+  padding: 20px 10px 10px 10px;
+  
+`;
+
+const AlbumInfoView = styled.View`
+  flex: 3;
+  padding: 0 10px 0 10px;
   justify-content: center;
+`;
+
+const AlbumWrapper = styled.View`
+  padding-right: 8px;
+  margin-top: 10px;  
   align-items: center;
   flex: 1;
 `;
-const StyledText = styled.Text`
+
+const ProfileItemName = styled.Text`
   font-size: 20px;
   color: #ffffff;
 `;
@@ -49,24 +32,23 @@ const StyledText = styled.Text`
 //받아와야할 것, UserName, Image, introduce, 공개 허용한 곡의 정보, 좋아요 등록한 곡의 정보
 export const ProfilePage = ({navigation}) => {
     return (
-
-        <Container>
-            <UserFirstView>
-                <StyledText>이너피스</StyledText>
-                <UserSecondView>
+        <SafeAreaView style={{flex: 1, backgroundColor: "#101010", justifyContent: "center"}}>
+            <ProfileView>
+                <ProfileItemName>이너피스</ProfileItemName>
+                <View style={{flexDirection: "row", alignItems: "center"}}>
                     <ProfileImage size={'MEDIUM'} imgURL={require('../../assets/images/profileImage/ProfileImage.png')}/>
-                    <UserThirdView>
+                    <View style={{padding: 10, justifyContent: "center", flex: 1}}>
                         <Text style={{color: '#ffffff', padding: 5}}>이제 작곡에 입문한 병아리 작곡가 입니다. {"\n"}피드백 환영합니다!</Text>
                         <View style={{width: 85, borderWidth: 1.5, borderColor: 'white', borderRadius: 3}}>
                             <Button
                                 onPress={() => navigation.navigate('Setting')} title={"프로필편집"} color='#101010'/>
                         </View>
-                    </UserThirdView>
-                </UserSecondView>
-            </UserFirstView>
+                    </View>
+                </View>
+            </ProfileView>
 
-            <OpenSingView>
-                <StyledText>공개 허용한 곡</StyledText>
+            <AlbumInfoView>
+                <ProfileItemName>공개 허용한 곡</ProfileItemName>
                 <FlatList
                     data={myAlbums}
                     keyExtractor={(item) => item.id}
@@ -75,17 +57,17 @@ export const ProfilePage = ({navigation}) => {
                     renderItem={({item}) => {
                         return (
                             <TouchableOpacity>
-                                <AlbumView>
+                                <AlbumWrapper>
                                     <Album title={item.title} state={item.state} description={item.description}
                                            coverURL={item.coverURL} isPublic={true}/>
-                                </AlbumView>
+                                </AlbumWrapper>
                             </TouchableOpacity>
                         );
                     }}
                 />
-            </OpenSingView>
-            <LikeSingView>
-                <StyledText>스크랩한 곡</StyledText>
+            </AlbumInfoView>
+            <AlbumInfoView>
+                <ProfileItemName>스크랩한 곡</ProfileItemName>
                 <FlatList
                     data={scrapedAlbums}
                     keyExtractor={(item) => item.id}
@@ -94,16 +76,16 @@ export const ProfilePage = ({navigation}) => {
                     renderItem={({item}) => {
                         return (
                             <TouchableOpacity>
-                                <AlbumView>
+                                <AlbumWrapper>
                                     <Album title={item.title} state={item.state} description={item.description}
                                            liked={true} coverURL={item.coverURL}/>
-                                </AlbumView>
+                                </AlbumWrapper>
                             </TouchableOpacity>
                         );
                     }}
                 />
-            </LikeSingView>
-        </Container>
+            </AlbumInfoView>
+        </SafeAreaView>
     );
 };
 

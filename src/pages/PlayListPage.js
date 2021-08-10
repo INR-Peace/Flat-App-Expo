@@ -10,12 +10,6 @@ const RenderAlbumView = styled.View`
   flex-direction: row;
   justify-content: center;
   width: 50%;
-  height: auto;
-`;
-
-const AlbumWrapper = styled.View`
-  margin: 10% 2% 0 2%;
-  align-items: center;
 `;
 
 const TitleWrapper = styled.View`
@@ -32,10 +26,10 @@ const FirstRoute = ({navigation}) => {
     const renderAlbum=({item})=>(
         <RenderAlbumView>
             <TouchableOpacity onPress={() => navigation.navigate('CommunityDetail')}>
-                <AlbumWrapper index={item.id}>
+                <View style={{alignItems: "center", marginVertical: 15}} index={item.id}>
                     <Album state="LIKE_LARGE" title={item.title} coverURL={item.coverURL} description={item.description}
                            time={item.time} artist={item.artist} isPublic={item.isPublic}/>
-                </AlbumWrapper>
+                </View>
             </TouchableOpacity>
         </RenderAlbumView>
     )
@@ -44,7 +38,7 @@ const FirstRoute = ({navigation}) => {
             <FlatList data={myAlbums}
                       renderItem={renderAlbum}
                       keyExtractor={(item) => item.id} //수정
-                      style={{margin: 20}}
+                      style={{marginHorizontal: 20, marginTop: 20}}
                       numColumns={2}
             />
         </View>
@@ -55,10 +49,10 @@ const SecondRoute = ({navigation}) => {
     const renderAlbum=({item})=>(
         <RenderAlbumView>
             <TouchableOpacity onPress={() => navigation.navigate('CommunityDetail')}>
-                <AlbumWrapper index={item.id}>
+                <View style={{alignItems: "center", marginVertical: 15}} index={item.id}>
                     <Album state="LIKE_LARGE" title={item.title} coverURL={item.coverURL} description={item.description}
                            time={item.time} artist={item.artist} liked={item.liked}/>
-                </AlbumWrapper>
+                </View>
             </TouchableOpacity>
         </RenderAlbumView>
     );
@@ -68,7 +62,7 @@ const SecondRoute = ({navigation}) => {
             <FlatList data={likedAlbums}
                       renderItem={renderAlbum}
                       keyExtractor={(item) => item.id} //수정
-                      style={{margin: 20}}
+                      style={{marginHorizontal: 20, marginTop: 20}}
                       numColumns={2}
             />
         </View>
@@ -130,6 +124,7 @@ const myAlbums = [
         description: '깔깔깔',
         time: '2:15',
         artist: '작곡가',
+        liked: false,
         isPublic: true
     },
     {
@@ -139,6 +134,7 @@ const myAlbums = [
         description: '흐애애앵',
         time: '0:25',
         artist: '작곡가',
+        liked: false,
         isPublic: true
     },
     {
@@ -149,6 +145,7 @@ const myAlbums = [
         description: '흐애애앵',
         time: '0:45',
         artist: '작곡가',
+        liked: false,
         isPublic: true
     },
     {
@@ -158,6 +155,7 @@ const myAlbums = [
         description: '뭘봐?',
         time: '0:15',
         artist:'작곡가',
+        liked: false,
         isPublic: false
     },
     {
@@ -167,6 +165,7 @@ const myAlbums = [
         description: '흐애애앵',
         time: '0:30',
         artist:'작곡가',
+        liked: false,
         isPublic: false
     },
     {
@@ -176,6 +175,7 @@ const myAlbums = [
         description: '흐애애앵',
         time: '0:33',
         artist:'작곡가',
+        liked: false,
         isPublic: false
     },{
         id: "7",
@@ -184,6 +184,7 @@ const myAlbums = [
         description: '흐애애앵',
         time: '0:15',
         artist:'작곡가',
+        liked: false,
         isPublic: false
     },{
         id: "8",
@@ -192,6 +193,7 @@ const myAlbums = [
         description: '흐애애앵',
         time: '0:18',
         artist:'작곡가',
+        liked: false,
         isPublic: false
     },
 ];
@@ -204,7 +206,8 @@ const likedAlbums = [
         description: '깔깔깔',
         time: '2:15',
         artist: 'Soji',
-        liked: true
+        liked: true,
+        isPublic: true
     },
     {
         coverURL: require("../../assets/images/EditListImage/EditListImage8.png"),
@@ -213,7 +216,8 @@ const likedAlbums = [
         description: '흐애애앵',
         time: '1:20',
         artist: '보경',
-        liked: true
+        liked: true,
+        isPublic: true
     },
     {
         coverURL: require("../../assets/images/profileImage/profilePage6.jpg"),
@@ -223,6 +227,7 @@ const likedAlbums = [
         description: '흐애애앵',
         time: '1:15',
         artist: '예진',
-        liked: true
+        liked: true,
+        isPublic: true
     },
 ];

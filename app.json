@@ -4,7 +4,7 @@
     "slug": "FlatApp",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/images/flat_icon_4x.png",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",

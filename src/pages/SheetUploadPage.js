@@ -3,30 +3,16 @@ import styled from 'styled-components/native';
 import {useEffect, useLayoutEffect, useState} from "react";
 import {AntDesign, MaterialCommunityIcons} from '@expo/vector-icons';
 import * as ImagePicker from 'expo-image-picker';
-import {Image, Platform} from "react-native";
-import {UIImagePickerControllerQualityType} from "expo-image-picker/build/ImagePicker.types";
+import {Image, Platform, SafeAreaView} from "react-native";
 
-const Container = styled.View`
-  flex: 1;
-  justify-content: center;
-  align-items: center;
-  background-color: #101010;
-`;
 
-const ButtonContainer = styled.TouchableOpacity`
-
+const ImageButtonContainer = styled.TouchableOpacity`
   width: 100%;
   height: 100%;
   border-radius: 15px;
   justify-content: center;
   align-items: center;
 `;
-
-const SheetImage = styled.Image`
-  width: 100%;
-  height: 100%;
-`;
-
 
 const SheetUploadPage = ({navigation}) => {
     const [image, setImage] = useState(null);
@@ -46,7 +32,7 @@ const SheetUploadPage = ({navigation}) => {
         let result = await ImagePicker.launchImageLibraryAsync({
             mediaTypes: ImagePicker.MediaTypeOptions.All,
             allowsEditing: true,
-            aspect: [9, 16],
+            aspect: [3, 4],
             quality: 1,
         });
 
@@ -85,11 +71,11 @@ const SheetUploadPage = ({navigation}) => {
     }, [navigation]);
 
     return (
-        <Container>
-            <ButtonContainer onPress={pickImage}>
-                <SheetImage source={image ? { uri: image } : require('../../assets/images/photo.jpg')}/>
-            </ButtonContainer>
-        </Container>
+        <SafeAreaView style={{flex: 1, backgroundColor: "#101010", justifyContent: "center", alignItems: "center"}}>
+            <ImageButtonContainer onPress={pickImage}>
+                <Image source={image ? { uri: image } : require('../../assets/images/photo.jpg')} style={{width: "100%", height: "100%"}}/>
+            </ImageButtonContainer>
+        </SafeAreaView>
     );
 };
 

@@ -1,11 +1,9 @@
 import React from "react";
 import styled from 'styled-components/native';
 import {RoundButton} from "../components/Button/RoundButton";
+import {SafeAreaView} from "react-native";
 
-const ParentContainer = styled.SafeAreaView`
-  flex: 1;
-`;
-const Container = styled.View`
+const ButtonWrapper = styled.View`
   flex: 1;
   justify-content: center;
   align-items: center;
@@ -14,11 +12,11 @@ const Container = styled.View`
 
 export const ComposePage = ({navigation}) => {
     return (
-        <ParentContainer>
-            <Container>
+        <SafeAreaView style={{flex: 1, backgroundColor: "#101010"}}>
+            <ButtonWrapper>
                 <RoundButton state="GRAD_LARGE" name="녹음하기" pageName="RecordPage" nav={navigation}/>
                 <RoundButton state="GRAD_LARGE" name="악보 불러오기" pageName="SheetUploadPage" nav={navigation}/>
-            </Container>
-        </ParentContainer>
+            </ButtonWrapper>
+        </SafeAreaView>
     );
 };

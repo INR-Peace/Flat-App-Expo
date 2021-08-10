@@ -1,27 +1,28 @@
 import React, {useLayoutEffect, useState} from "react";
-import {View, Dimensions, StyleSheet} from 'react-native';
+import {View, Dimensions, StyleSheet, SafeAreaView} from 'react-native';
 import styled from 'styled-components/native';
 import {TabView, SceneMap, TabBar} from 'react-native-tab-view';
 import {SquareButtonList} from '../components/Button/SquareButtonList';
 import {Ionicons, MaterialCommunityIcons} from "@expo/vector-icons";
 import {MusicSheet} from "../components/MusicSheet";
 
-const FirstRoute = () => (
-    <View style={[styles.scene]}>
-        <SquareButtonList effects={["Piano", "Drum", "Acoustic", "Electronic", "Saxophone", "Violin"]}/>
-    </View>
-);
-
-const SecondRoute = () => (
-    <View style={[styles.scene]}>
-        <SquareButtonList effects={["BALLAD", "R&B", "Rock", "HIP HOP", "JAZZ", "DANCE"]}/>
-    </View>
-);
 
 const initialLayout = {width: Dimensions.get('window').width};
 
+const styles = StyleSheet.create({
+    scene: {
+        flex: 1,
+        backgroundColor: '#C4C4C4',
+    },
+    like: {
+        padding: 8,
+        backgroundColor: '#101010',
+        fontSize: 10,
+    },
+});
+
 // MusicSheet들어갈 자리 임시방편
-const Container = styled.ScrollView`
+const MusicSheetView = styled.ScrollView`
   background-color: #FFFFFF;
   border-width: 1px;
   flex-direction: row;
@@ -29,9 +30,18 @@ const Container = styled.ScrollView`
   flex: 1;
 `;
 
-const ParentContainer = styled.View`
-  flex: 1;
-`;
+const FirstRoute = () => (
+  <View style={[styles.scene]}>
+      <SquareButtonList effects={["Piano", "Drum", "Acoustic", "Electronic", "Saxophone", "Violin"]}/>
+  </View>
+);
+
+const SecondRoute = () => (
+  <View style={[styles.scene]}>
+      <SquareButtonList effects={["BALLAD", "R&B", "Rock", "HIP HOP", "JAZZ", "DANCE"]}/>
+  </View>
+);
+
 
 const getTop = (note) => {
     switch (note) {
@@ -112,11 +122,11 @@ export const EditPage = ({navigation}) => {
     }, []);
 
     return (
-        <ParentContainer>
+        <SafeAreaView style={{flex: 1, backgroundColor: "#101010"}}>
             {/*<TopBar2/>*/}
-            <Container horizontal={true}>
+            <MusicSheetView horizontal={true}>
                 <MusicSheet positions={result}/>
-            </Container>
+            </MusicSheetView>
             <TabView
                 navigationState={{index, routes}}
                 renderScene={renderScene}
@@ -132,18 +142,8 @@ export const EditPage = ({navigation}) => {
                     />
                 )}
             />
-        </ParentContainer>
+        </SafeAreaView>
     );
 };
 
-const styles = StyleSheet.create({
-    scene: {
-        flex: 1,
-        backgroundColor: '#C4C4C4',
-    },
-    like: {
-        padding: 8,
-        backgroundColor: '#101010',
-        fontSize: 10,
-    },
-});
+
