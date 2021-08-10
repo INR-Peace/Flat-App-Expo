@@ -5,7 +5,6 @@ import {RoundButton} from "../components/Button/RoundButton";
 import {Dimensions, Image, KeyboardAvoidingView, Platform, SafeAreaView, ScrollView, Text, View} from "react-native";
 import {StyleSheet} from "react-native";
 
-
 const LogoView = styled.View`
   margin-bottom: 40px;
   justify-content: center;
